@@ -8,13 +8,19 @@ See also the Tana Template published at
 ## Installation
 Grab the latest release zip from github in the Releases area.
 
-When you unzip the directory, you'll have three files 
-```tana-calendar-helper
-scripts/getcalendar.swift
-scripts/calendar_auth.scpt
-```
+When you unzip the directory, you'll have a directory `tana-calendar-helper` containing three files 
 
-You launch the service on a command line like this:
+`tana-calendar-helper` The server program. A compiled Go universal binary.
+`scripts/getcalendar.swift` The helper script that talks to Apple's Calendar API`
+`scripts/calendar_auth.scpt` Another small helper that prompts for permission to access the Calendar data
+
+Put this folder wherever you like and then, open a new Terminal window and `cd` to the directory.
+
+If you aren't familiar with using Terminal, then in the Finder, you can choose "Show Path Bar" from the View menu.
+Open the folder in the Finder and then right-click on the folder name in the path bar at the bottom of the window.
+You should see an option "Open in Terminal. This will open a terminal already in the right folder.
+
+You launch the service on a command line by just typing the name and hitting enter:
 `tana-calendar-helper`
 
 The service will startup and begin listening for API calls on port 4000
@@ -22,7 +28,7 @@ The service will startup and begin listening for API calls on port 4000
 You can also provide a different port number like this:
 `tana-calendar-helper -port 4096`
 
-Whenever you start the service, you ay get a permission box from Mac OS asking you to grant network access to the service. You need to Allow this.
+Whenever you start the service, you may get a permission box from Mac OS asking you to grant network access to the service. You need to Allow this.
 
 You can test that the service is working by going to the following URL in your browser:
 `http://localhost:4000/`  (or whatever port you are using)
@@ -37,7 +43,7 @@ Please see the Tana Template here:
 ![Tana Calendar Helper](https://app.tana.inc/?bundle=cVYW2gX8nY.WUDhKchZDK "Tana Calendar Helper config")
 
 Or set up a command node like this:
-![Getting Usage into Tana](assets/tana-helper-command.png?raw=true "Tana Command Node")
+![Getting Usage into Tana](assets/tana-calendar-helper-command.png?raw=true "Tana Command Node")
 
 ### Calendar API stuff
 

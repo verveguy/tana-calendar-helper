@@ -3,7 +3,7 @@ A small service, written in Go, that helps Tana get your Calendar for the day. P
 
 Only works on Mac for now since it relies on Apple's Calendar.app and associated API to fetch the calendar data. If Calendar.app is configured to synchronize calendars from iCloud, Google and/or Microsoft Office, this will see all that data.
 
-See also the Tana Template published at 
+See also the [Tana Template](https://app.tana.inc/?bundle=cVYW2gX8nY.WUDhKchZDK) for more info. 
 
 ## Installation
 Grab the latest release zip from github in the Releases area.

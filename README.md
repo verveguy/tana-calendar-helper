@@ -21,16 +21,19 @@ Open the folder in the Finder and then right-click on the folder name in the pat
 You should see an option "Open in Terminal. This will open a terminal already in the right folder.
 
 You launch the service on a command line by just typing the name and hitting enter:
+
 `tana-calendar-helper`
 
 The service will startup and begin listening for API calls on port 4000
 
 You can also provide a different port number like this:
+
 `tana-calendar-helper -port 4096`
 
 Whenever you start the service, you may get a permission box from Mac OS asking you to grant network access to the service. You need to Allow this.
 
 You can test that the service is working by going to the following URL in your browser:
+
 `http://localhost:4000/`  (or whatever port you are using)
 
 If successful, you should get back a page of Usage instructions.

@@ -43,7 +43,7 @@ The first time you run this service and access the actual `/calendar` endpoint s
 
 ## Installing Command in Tana
 Please see the Tana Template here:
-![Tana Calendar Helper](https://app.tana.inc/?bundle=cVYW2gX8nY.WUDhKchZDK "Tana Calendar Helper config")
+[Tana Calendar Helper](https://app.tana.inc/?bundle=cVYW2gX8nY.WUDhKchZDK "Tana Calendar Helper config")
 
 Or set up a command node like this:
 ![Getting Usage into Tana](assets/tana-calendar-helper-command.png?raw=true "Tana Command Node")

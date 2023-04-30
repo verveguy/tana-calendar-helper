@@ -24,11 +24,11 @@ You launch the service on a command line by just typing the name and hitting ent
 
 `tana-calendar-helper`
 
-The service will startup and begin listening for API calls on port 4000
+The service will startup and begin listening for API calls on port 4096
 
 You can also provide a different port number like this:
 
-`tana-calendar-helper -port 4096`
+`tana-calendar-helper -port 8192`
 
 Whenever you start the service, you may get a permission box from Mac OS asking you to grant network access to the service. You need to Allow this.
 

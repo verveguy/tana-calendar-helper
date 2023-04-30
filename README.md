@@ -11,7 +11,7 @@ Grab the latest release zip from github in the Releases area.
 When you unzip the directory, you'll have a directory `tana-calendar-helper` containing three files 
 
 `tana-calendar-helper` The server program. A compiled Go universal binary.
-`scripts/getcalendar.swift` The helper script that talks to Apple's Calendar API`
+`scripts/getcalendar.swift` The helper script that talks to Apple's Calendar API
 `scripts/calendar_auth.scpt` Another small helper that prompts for permission to access the Calendar data
 
 Put this folder wherever you like and then, open a new Terminal window and `cd` to the directory.

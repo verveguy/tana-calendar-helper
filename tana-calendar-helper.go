@@ -100,6 +100,13 @@ func calendarHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Run the calendar_auth.scpt1 script
+	err = runCalendarAuthScript()
+	if err != nil {
+		http.Error(w, "Failed to run calendar_auth.scpt1 script: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	output, err := runCalendarSwiftScript(payload)
 	if err != nil {
 		w.Header().Set("X-HTTP-Status-Code", fmt.Sprintf("%d", http.StatusInternalServerError))
@@ -110,6 +117,15 @@ func calendarHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-HTTP-Status-Code", fmt.Sprintf("%d", http.StatusOK))
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprint(w, output)
+}
+
+func runCalendarAuthScript() error {
+	cmd := exec.Command("osascript", "./scripts/calendar_auth.scpt")
+	err := cmd.Run()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func runCalendarSwiftScript(payload Payload) (string, error) {

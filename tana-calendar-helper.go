@@ -101,16 +101,17 @@ func calendarHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Run the calendar_auth.scpt1 script
-	err = runCalendarAuthScript()
+	output, err := runCalendarAuthScript()
 	if err != nil {
-		http.Error(w, "Failed to run calendar_auth.scpt1 script: "+err.Error(), http.StatusInternalServerError)
+		w.Header().Set("X-HTTP-Status-Code", fmt.Sprintf("%d", http.StatusInternalServerError))
+		http.Error(w, fmt.Sprintf("Failed to run calendar_auth.scpt1 script.\nError %v", output), http.StatusInternalServerError)
 		return
 	}
 
-	output, err := runCalendarSwiftScript(payload)
+	output, err = runCalendarSwiftScript(payload)
 	if err != nil {
 		w.Header().Set("X-HTTP-Status-Code", fmt.Sprintf("%d", http.StatusInternalServerError))
-		http.Error(w, fmt.Sprintf("Error running getcalendar.swift script: %v", err), http.StatusInternalServerError)
+		http.Error(w, fmt.Sprintf("Error running getcalendar.swift script.\nError %v", err), http.StatusInternalServerError)
 		return
 	}
 
@@ -119,13 +120,10 @@ func calendarHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, output)
 }
 
-func runCalendarAuthScript() error {
+func runCalendarAuthScript() (string, error) {
 	cmd := exec.Command("osascript", "./scripts/calendar_auth.scpt")
-	err := cmd.Run()
-	if err != nil {
-		return err
-	}
-	return nil
+	output, err := cmd.CombinedOutput()
+	return string(output), err
 }
 
 func runCalendarSwiftScript(payload Payload) (string, error) {
@@ -159,12 +157,8 @@ func runCalendarSwiftScript(payload Payload) (string, error) {
 
 	cmd.Args = append(cmd.Args, args...)
 
-	output, err := cmd.Output()
-	if err != nil {
-		return "", err
-	}
-
-	return string(output), nil
+	output, err := cmd.CombinedOutput()
+	return string(output), err
 }
 
 const usage = `Usage: go run main.go [-port <port_number>] [-help]

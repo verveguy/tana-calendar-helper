@@ -10,17 +10,26 @@ rm -rf bin
 rm -rf ${BINARY_NAME}
 rm -f ${BINARY_NAME}.zip
 
+mkdir -p bin/scripts
+
 # Compile for macOS
 echo "Building for macOS arm64..."
-GOOS=darwin GOARCH=arm64 go build -o bin/${BINARY_NAME}.arm64 ${BINARY_NAME}.go
+ARCH=arm64
+GOOS=darwin GOARCH=${ARCH} go build -o bin/${BINARY_NAME}.${ARCH} ${BINARY_NAME}.go
+swiftc scripts/getcalendar.swift -o bin/scripts/getcalendar.${ARCH} -target arm64-apple-macosx10.15
+
 echo "Building for macOS amd64..."
-GOOS=darwin GOARCH=amd64 go build -o bin/${BINARY_NAME}.amd64 ${BINARY_NAME}.go
+ARCH=amd64
+GOOS=darwin GOARCH=${ARCH} go build -o bin/${BINARY_NAME}.${ARCH} ${BINARY_NAME}.go
+swiftc scripts/getcalendar.swift -o bin/scripts/getcalendar.${ARCH} -target x86_64-apple-macosx10.15
 
 echo "Packaging universal binary..."
-lipo -create -output bin/${BINARY_NAME} bin/${BINARY_NAME}.arm64 ./bin/${BINARY_NAME}.amd64
+lipo -create -output bin/${BINARY_NAME} bin/${BINARY_NAME}.arm64 bin/${BINARY_NAME}.amd64
+lipo -create -output bin/scripts/getcalendar bin/scripts/getcalendar.arm64 bin/scripts/getcalendar.amd64
 
 echo "Removing arch builds..."
-rm bin/${BINARY_NAME}.arm64 ./bin/${BINARY_NAME}.amd64
+rm bin/${BINARY_NAME}.arm64 bin/${BINARY_NAME}.amd64
+rm bin/scripts/*.arm64 bin/scripts/*.amd64
 
 # Compile for Windows
 # echo "Building for Windows..."
@@ -30,8 +39,8 @@ rm bin/${BINARY_NAME}.arm64 ./bin/${BINARY_NAME}.amd64
 # echo "Building for Linux..."
 # GOOS=linux GOARCH=386 go build -o bin/${BINARY_NAME}.linux ${BINARY_NAME}.go
 
-echo "Staging required scripts..."
-cp -r scripts bin
+#echo "Staging required scripts..."
+cp scripts/calendar_auth.scpt bin/scripts
 chmod +x bin/scripts/*
 
 echo "Preparing zip"

@@ -70,3 +70,7 @@ You can change things with the following JSON payload. All fields are optional.
 ```
 
 See the [scripts/getcalendar.swift](scripts/getcalendar.swift) script for more details.
+
+## Troubleshooting
+The most common cause of problems is that you ask for a calendar that *does not exist*. The script defaults to `Calendar` as the name of your calendar. You can change this by passing `"calendar": "<your calendar name>"` in the JSON payload.
+

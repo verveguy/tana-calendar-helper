@@ -111,7 +111,7 @@ func calendarHandler(w http.ResponseWriter, r *http.Request) {
 	output, err = runCalendarSwiftScript(payload)
 	if err != nil {
 		w.Header().Set("X-HTTP-Status-Code", fmt.Sprintf("%d", http.StatusInternalServerError))
-		http.Error(w, fmt.Sprintf("Error running getcalendar.swift script.\nError %v", err), http.StatusInternalServerError)
+		http.Error(w, fmt.Sprintf("Error running getcalendar.swift script.\nError %v", output), http.StatusInternalServerError)
 		return
 	}
 
@@ -127,7 +127,7 @@ func runCalendarAuthScript() (string, error) {
 }
 
 func runCalendarSwiftScript(payload Payload) (string, error) {
-	cmd := exec.Command("./scripts/getcalendar.swift", "-noheader")
+	cmd := exec.Command("./scripts/getcalendar", "-noheader")
 	var args []string
 
 	if payload.Calendar != "" {

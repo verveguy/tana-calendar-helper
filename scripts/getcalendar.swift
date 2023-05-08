@@ -288,7 +288,7 @@ let eventArray = filteredEvents.map { event in
         )
 }
 
-// generate ouutput in tana-paste format
+// generate output in tana-paste format
 for event in eventArray {
     var node_tag = meeting_tag
     var name = "- " + event.title + " with "

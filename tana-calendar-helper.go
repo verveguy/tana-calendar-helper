@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 type Payload struct {
@@ -158,7 +159,13 @@ func runCalendarSwiftScript(payload Payload) (string, error) {
 	cmd.Args = append(cmd.Args, args...)
 
 	output, err := cmd.CombinedOutput()
-	return string(output), err
+
+	outputStr := strings.TrimSpace(string(output))
+	if outputStr == "" {
+		return "No events found. Check that you are requesting the correct calendar.", nil
+	}
+
+	return outputStr, err
 }
 
 const usage = `Usage: go run main.go [-port <port_number>] [-help]

@@ -44,7 +44,7 @@ cp scripts/calendar_auth.scpt bin/scripts
 chmod +x bin/scripts/*
 
 echo "Preparing zip"
-mv bin ${BINARY_NAME}
+cp -rp bin ${BINARY_NAME}
 zip -r ${BINARY_NAME} ${BINARY_NAME}
 
 # cleanup
